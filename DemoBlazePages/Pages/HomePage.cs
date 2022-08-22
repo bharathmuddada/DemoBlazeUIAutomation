@@ -8,12 +8,49 @@ namespace DemoBlazePages.Pages
 {
     public class HomePage : BasePage
     {
-
-        IWebDriver driver;
-
+        //private IWebDriver driver;
         public HomePage(IWebDriver driver) : base(driver)
         {
-            this.driver = driver;
+            //this.driver = driver;
+         }
+
+
+        public IWebElement Menu_selection(string menu_name)  => driver.FindElement(By.XPath($"//a[text()='{menu_name}']"));
+        public IWebElement ItemSelected(string name) => driver.FindElement(By.XPath($"//a[text()='{name}']"));
+
+
+
+        public void clickOnMenu(string menuname) {
+
+            //for (int i = 0; i <= 2; i++)
+            //{
+            //    try
+            //    {
+            //        ClickElement(Menu_selection(menuname));
+            //        break;
+            //    }
+            //    catch (Exception e)
+            //    {
+            //        Console.WriteLine(e.Message);
+            //    }
+            //}
+            //
+
+            driver.Navigate().Refresh();
+            ClickElement(Menu_selection(menuname));
+
         }
+
+        public ProductPage SelectItemToView(string productName)
+        {
+            ClickElement(ItemSelected(productName));
+            return new ProductPage(driver);
+        }
+
+
+
+
+
+
     }
 }

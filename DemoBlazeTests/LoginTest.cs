@@ -1,48 +1,48 @@
-using DemoBlazeCoreFW;
-using DemoBlazePages.Pages;
 using OpenQA.Selenium.Chrome;
 using WebDriverManager;
 using WebDriverManager.DriverConfigs.Impl;
 
 namespace DemoBlazeTests
 {
+    [Parallelizable(ParallelScope.All)]
     public class LoginTest :BaseTest
     {
        
         [Test]
-        public void LoginTest1()
+        public void LoginWithEmptyCredentials()
         {
-            var headerBar = new HeaderBar(Driver.current);
-            
-            LoginPage loginpage = headerBar.ClickLoginLink();
+            HeaderNav headernav = new HeaderNav(Driver.current);
 
-            loginpage.DoLogin(String.Empty,String.Empty);
+          
+            LoginPage loginpage = headernav.ClickLoginLink();
+           
+            loginpage.DoLogin(string.Empty,string.Empty);
 
-            Assert.IsTrue(loginpage.NoUsernameAndPassword());
+            Assert.That(loginpage.NoUsernameAndPassword(), Is.True);
         }
 
         [Test]
-        public void LoginTest2()
+        public void LoginWithInValidCredentials()
         {
-            var headerBar = new HeaderBar(Driver.current);
+            var headerBar = new HeaderNav(Driver.current);
 
             LoginPage loginpage = headerBar.ClickLoginLink();
 
-            loginpage.DoLogin("rand", "password1");
+            loginpage.DoLogin("AutomationUser", "InvalidPassword:");
 
-            Assert.IsTrue(loginpage.WrongPassword());
+            Assert.That(loginpage.WrongPassword(), Is.True);
         }
 
         [Test]
-        public void LoginTest3()
+        public void LoginWithValidCredentials()
         {
-            var headerBar = new HeaderBar(Driver.current);
+            var headerBar = new HeaderNav(Driver.current);
 
             LoginPage loginpage = headerBar.ClickLoginLink();
 
             loginpage.DoLogin("AutomationUser", "happy");
 
-            Assert.That(loginpage.getLoggedinUserName(), Is.EqualTo("Welcome AutomationUser"));
+            Assert.That(loginpage.GetLoggedinUserName(), Is.EqualTo("Welcome AutomationUser"));
         }
     }
 }

@@ -13,14 +13,22 @@ namespace DemoBlazeCoreFW
     public static class Driver
     {
         [ThreadStatic]
-        public static IWebDriver driver;
-        public  static IWebDriver current => driver;
+        public static IWebDriver? driver;
+        public static IWebDriver current
+        {
+            get
+            {
+                return driver;
+            }
+        }
+
         public static void init() {
 
             new DriverManager().SetUpDriver(new ChromeConfig());
             driver = new ChromeDriver();
             driver.Manage().Window.Maximize();
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+
 
         }
     }
