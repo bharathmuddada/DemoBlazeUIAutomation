@@ -34,6 +34,18 @@ namespace DemoBlazePages.Pages
             return web_element.Displayed;
             
         }
+       
+        public bool WaitForElementsTobeDisplayed(IReadOnlyCollection<IWebElement> elements)
+        {
+            bool status = false;
+            foreach (var element in elements)
+            {
+                var web_element = wait.Until(drv => element);
+                status = web_element.Displayed;
+            }
+            return status;
+
+        }
 
         public bool WaitForElementTobeEnabled(IWebElement element)
         {
@@ -69,6 +81,7 @@ namespace DemoBlazePages.Pages
         {
             WaitForElementTobeDisplayed(element);
             Console.WriteLine($"text from the element is  {element.Text}");
+           
             return element.Text;
 
 
@@ -83,6 +96,8 @@ namespace DemoBlazePages.Pages
             return alertText;
            
         }
+
+
 
     }
 

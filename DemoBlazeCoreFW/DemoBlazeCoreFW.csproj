@@ -12,4 +12,10 @@
     <PackageReference Include="WebDriverManager" Version="2.15.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="allureConfig.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

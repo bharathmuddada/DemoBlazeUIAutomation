@@ -31,5 +31,16 @@ namespace DemoBlazeCoreFW
 
 
         }
+
+        public static void getScreenshot(String filename)
+        {
+
+            var screenshot = ((ITakesScreenshot)driver).GetScreenshot();
+            //var filename = TestContext.CurrentContext.Test.MethodName + "_screenshot_" + DateTime.Now.Ticks + ".png";
+            var path = "C:\\Users\\Bharath\\source\\repos\\DemoBlazeUIAutomation\\Allure-Results\\" + filename;
+            screenshot.SaveAsFile(path, ScreenshotImageFormat.Png);
+
+
+        }
     }
 }

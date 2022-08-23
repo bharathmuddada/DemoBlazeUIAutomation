@@ -20,15 +20,18 @@ namespace DemoBlazePages.Pages
         public IWebElement AddtoCartbutton => driver.FindElement(By.XPath("//a[text()='Add to cart']"));
 
 
+      
+
         public CartPage AddProductToCart() {
             ClickElement(AddtoCartbutton);
             getAlertText();
-            headernav.ClickCartLink();
+            headernav.NavigateToCartPage();
             return new CartPage(driver);
 
         }
 
 
+       
 
     }
 }

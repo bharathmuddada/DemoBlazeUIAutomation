@@ -20,7 +20,7 @@ namespace DemoBlazePages.Pages
 
 
 
-        public void clickOnMenu(string menuname) {
+        public HomePage clickOnMenu(string menuname) {
 
             //for (int i = 0; i <= 2; i++)
             //{
@@ -34,15 +34,16 @@ namespace DemoBlazePages.Pages
             //        Console.WriteLine(e.Message);
             //    }
             //}
-            //
 
             driver.Navigate().Refresh();
             ClickElement(Menu_selection(menuname));
+            return this;
 
         }
 
         public ProductPage SelectItemToView(string productName)
         {
+            driver.Navigate().Refresh();
             ClickElement(ItemSelected(productName));
             return new ProductPage(driver);
         }

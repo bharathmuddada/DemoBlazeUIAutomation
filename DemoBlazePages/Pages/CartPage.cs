@@ -14,13 +14,75 @@ namespace DemoBlazePages.Pages
 
         public IWebElement productname => driver.FindElement(By.XPath("//*[@id='tbodyid']/tr[1]/td[2]"));
 
+        public IReadOnlyCollection<IWebElement> Productnames => driver.FindElements(By.XPath("//*[@id='tbodyid']//td[2]"));
+        public IWebElement placeOrderButton => driver.FindElement(By.XPath("//button[text()='Place Order']"));
 
+        public IWebElement namefield => driver.FindElement(By.Id("name"));
+
+        public IWebElement countryfield => driver.FindElement(By.Id("country"));
+
+
+        public IWebElement cityfield => driver.FindElement(By.Id("city"));
+
+        public IWebElement creditcardfield => driver.FindElement(By.Id("card"));
+
+        public IWebElement monthfield => driver.FindElement(By.Id("month"));
+
+        public IWebElement yearfield => driver.FindElement(By.Id("year"));
+
+        public IWebElement purchasebutton => driver.FindElement(By.XPath("//button[text()='Purchase']"));
+
+        public IWebElement thankyouheader => driver.FindElement(By.XPath("//div[@class='sweet-alert  showSweetAlert visible']//h2"));
+
+        public IWebElement DeleteProductFromCart => driver.FindElement(By.XPath("//a[text()='Delete']"));
+
+
+   
         public string GetProductName() {
 
             WaitForElementTobeDisplayed(productname);
 
             return productname.Text;
         }
+
+        public void PlaceOrder() {
+
+            ClickElement(placeOrderButton);
+            SendTextToElement(namefield, "Automationuser");
+            SendTextToElement(countryfield, "India");
+            SendTextToElement(cityfield, "Hyderabad");
+            SendTextToElement(creditcardfield, "visa card");
+            SendTextToElement(monthfield, "August");
+            SendTextToElement(yearfield, "2022");
+            ClickElement(purchasebutton);
+
+        }
+
+        public string GetOrderConfirmation(){
+
+            return GetTextFromElement(thankyouheader);
+
+         }
+
+        public void DeleteItemFromCart()
+        {
+            ClickElement(DeleteProductFromCart);
+
+        }
+
+        public List<string> GetProductNames()
+        {
+
+            var prodnameList = new List<string>();
+            WaitForElementsTobeDisplayed(Productnames);
+
+            foreach (var prodname in Productnames)
+                prodnameList.Add(prodname.Text);
+            return prodnameList;
+
+
+        }
+
 
     }
 }

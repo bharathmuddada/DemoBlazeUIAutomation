@@ -26,16 +26,23 @@ namespace DemoBlazePages.Pages
         public IWebElement loginPage_link => driver.FindElement(By.XPath("//a[contains(text(),'Log in')]"));
 
 
-        public LoginPage ClickLoginLink() {
+        public LoginPage NavigateToLoginPage() {
             loginPage_link.Click();
             return new LoginPage(driver);
 
         }
 
-        public CartPage ClickCartLink()
+        public CartPage NavigateToCartPage()
         {
             cartPage_link.Click();
             return new CartPage(driver);
+
+        }
+
+        public HomePage NavigateToHomePage()
+        {
+            homePage_link.Click();
+            return new HomePage(driver);
 
         }
 
