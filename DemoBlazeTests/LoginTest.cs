@@ -5,7 +5,7 @@ using WebDriverManager.DriverConfigs.Impl;
 
 namespace DemoBlazeTests
 {
-    [Parallelizable(ParallelScope.All)]
+    [Parallelizable(ParallelScope.Fixtures)]
     [AllureNUnit]
     [AllureSuite("DemoBlazeUI - LoginTests")]
     public class LoginTest :BaseTest

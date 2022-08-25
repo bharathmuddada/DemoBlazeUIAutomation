@@ -28,6 +28,7 @@ namespace DemoBlazePages.Pages
 
         public LoginPage NavigateToLoginPage() {
             loginPage_link.Click();
+           
             return new LoginPage(driver);
 
         }

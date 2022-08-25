@@ -20,7 +20,7 @@ namespace DemoBlazePages.Pages
 
 
 
-        public HomePage clickOnMenu(string menuname) {
+        public HomePage  clickOnMenu(string menuname) {
 
             //for (int i = 0; i <= 2; i++)
             //{
@@ -43,8 +43,19 @@ namespace DemoBlazePages.Pages
 
         public ProductPage SelectItemToView(string productName)
         {
-            driver.Navigate().Refresh();
-            ClickElement(ItemSelected(productName));
+            try
+            {
+                ClickElement(Menu_selection(productName));
+            }
+            catch (StaleElementReferenceException e) 
+            {
+                Console.WriteLine(e.Message);
+                driver.Navigate().Refresh();
+                Console.WriteLine("Page refreshed to handle stale element exception");
+                ClickElement(Menu_selection(productName));
+            }
+
+            //ClickElement(ItemSelected(productName));
             return new ProductPage(driver);
         }
 

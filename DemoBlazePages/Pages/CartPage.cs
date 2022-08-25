@@ -36,8 +36,10 @@ namespace DemoBlazePages.Pages
 
         public IWebElement DeleteProductFromCart => driver.FindElement(By.XPath("//a[text()='Delete']"));
 
+        public IWebElement TotalCartPrice => driver.FindElement(By.XPath("//h3[@id='totalp']"));
 
-   
+        public IReadOnlyCollection<IWebElement> ProductPrices => driver.FindElements(By.XPath("//*[@id='tbodyid']//td[3]"));
+
         public string GetProductName() {
 
             WaitForElementTobeDisplayed(productname);
@@ -74,15 +76,32 @@ namespace DemoBlazePages.Pages
         {
 
             var prodnameList = new List<string>();
+
+    
             WaitForElementsTobeDisplayed(Productnames);
 
             foreach (var prodname in Productnames)
                 prodnameList.Add(prodname.Text);
             return prodnameList;
 
+            
+           
+        }
+
+
+        public int SumOfProductPrices() {
+
+            int total = 0;
+
+            foreach (var prodprice in ProductPrices) {
+               total += int.Parse(prodprice.Text);
+               }
+
+            return total;
 
         }
 
+        
 
     }
 }

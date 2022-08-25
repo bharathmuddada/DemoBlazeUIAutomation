@@ -45,6 +45,7 @@ namespace DemoBlazePages.Pages
             }
             return status;
 
+        
         }
 
         public bool WaitForElementTobeEnabled(IWebElement element)
@@ -58,9 +59,9 @@ namespace DemoBlazePages.Pages
         public void ClickElement(IWebElement element)
         {
 
-            if (WaitForElementTobeEnabled(element))
+            if (WaitForElementTobeEnabled(element) && WaitForElementTobeDisplayed(element))
             {
-                Console.WriteLine(element.Text+"element displayed");
+                Console.WriteLine(element.Text+" element is clicked");
                 element.Click();
 
             }

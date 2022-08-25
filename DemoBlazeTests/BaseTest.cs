@@ -41,14 +41,14 @@ namespace DemoBlazeTests
         public void CloseBrowser()
         {
 
-            if (TestContext.CurrentContext.Result.Outcome == ResultState.Success)
-            {
+            //if (TestContext.CurrentContext.Result.Outcome == ResultState.Success)
+            //{
                 var filename = TestContext.CurrentContext.Test.MethodName + "_screenshot_" + DateTime.Now.Ticks + ".png";
                 Driver.getScreenshot(filename);
                 var path = "C:\\Users\\Bharath\\source\\repos\\DemoBlazeUIAutomation\\Allure-Results\\" + filename;
                 TestContext.AddTestAttachment(path);
                 AllureLifecycle.Instance.AddAttachment(filename, "image/png", path);
-            }
+            //}
             Driver.current.Quit();
 
         }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DemoBlazeTests
 {
-    [Parallelizable(ParallelScope.All)]
+    [Parallelizable]
     [AllureNUnit]
     [AllureSuite("DemoBlazeUI - Orders Tests")]
     public class OrdersTest : BaseTest
