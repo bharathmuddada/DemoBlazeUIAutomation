@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Firefox;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,22 +25,31 @@ namespace DemoBlazeCoreFW
             }
         }
 
-        public static void init() {
+        public static void init(string browsername) {
 
-            new DriverManager().SetUpDriver(new ChromeConfig());
-            driver = new ChromeDriver();
+            if(string.Equals(browsername, "chrome", StringComparison.OrdinalIgnoreCase))
+            {
+                new DriverManager().SetUpDriver(new ChromeConfig());
+                driver = new ChromeDriver();
+              
+            }
+            else if (string.Equals(browsername, "firefox", StringComparison.OrdinalIgnoreCase))
+            {
+                new DriverManager().SetUpDriver(new FirefoxConfig());
+                driver = new FirefoxDriver();
+              
+            }
+
             driver.Manage().Window.Maximize();
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
 
-
         }
 
-        public static void getScreenshot(string filename)
+        public static void getScreenshot(string screenshot_path)
         {
 
-            var screenshot = ((ITakesScreenshot)driver).GetScreenshot();
-            var path = "C:\\Users\\Bharath\\source\\repos\\DemoBlazeUIAutomation\\Allure-Results\\" + filename;
-            screenshot.SaveAsFile(path, ScreenshotImageFormat.Png);
+            Screenshot screenshot = (driver as ITakesScreenshot).GetScreenshot();
+            screenshot.SaveAsFile(screenshot_path, ScreenshotImageFormat.Png);
 
 
         }

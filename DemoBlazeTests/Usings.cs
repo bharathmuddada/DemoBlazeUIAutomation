@@ -6,3 +6,4 @@ global using WebDriverManager;
 global using WebDriverManager.DriverConfigs.Impl;
 global using NUnit.Allure.Core;
 global using NUnit.Allure.Attributes;
+global using Allure.Commons;

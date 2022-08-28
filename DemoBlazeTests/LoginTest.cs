@@ -22,7 +22,8 @@ namespace DemoBlazeTests
            
             loginpage.DoLogin(string.Empty,string.Empty);
 
-            Assert.That(loginpage.NoUsernameAndPassword(), Is.True);
+            AllureLifecycle.Instance.WrapInStep( () => {
+                Assert.That(loginpage.NoUsernameAndPassword(), Is.True); },"Validate empty credentials");
         }
 
         [Test]
@@ -42,11 +43,14 @@ namespace DemoBlazeTests
         [AllureName(name: "Login with valid credentials")]
         public void LoginWithValidCredentials()
         {
+            string username = ConfigReaderHelpers.GetconfigDetails("username");
+            string password = ConfigReaderHelpers.GetconfigDetails("password");
+
             var headerBar = new HeaderNav(Driver.current);
 
             LoginPage loginpage = headerBar.NavigateToLoginPage();
 
-            loginpage.DoLogin("AutomationUser", "happy");
+            loginpage.DoLogin(username, password);
 
             Assert.That(loginpage.GetLoggedinUserName(), Is.EqualTo("Welcome AutomationUser"));
         }

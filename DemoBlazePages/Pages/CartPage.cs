@@ -40,6 +40,8 @@ namespace DemoBlazePages.Pages
 
         public IReadOnlyCollection<IWebElement> ProductPrices => driver.FindElements(By.XPath("//*[@id='tbodyid']//td[3]"));
 
+
+        public IWebElement PriceonConfirmation => driver.FindElement(By.XPath("//div[@class='sweet-alert  showSweetAlert visible']//p"));
         public string GetProductName() {
 
             WaitForElementTobeDisplayed(productname);
@@ -101,6 +103,18 @@ namespace DemoBlazePages.Pages
 
         }
 
+
+        public int PriceFromOrderConfirmation() {
+
+            string price = GetTextFromElement(PriceonConfirmation);
+            Console.WriteLine($"Price from the confirmation page {price}");
+            string[] pricearray = price.Split("\n");
+            string final_price = pricearray[1];
+            string amount = final_price.Substring(8,9);
+            string[] final_amount = amount.Split(" ");
+            Console.WriteLine($"Final Price is {final_amount[0].Trim()}");
+            return int.Parse(final_amount[0].Trim());
+        }
         
 
     }

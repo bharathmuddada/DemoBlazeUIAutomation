@@ -1,6 +1,6 @@
 ﻿{
 	"allure": {
-		"directory": "C:\\Users\\Bharath\\source\\repos\\DemoBlazeUIAutomation\\Allure-Results",
+		"directory": "allure-results",
 		"links": [
 			"https://github.com/nunit/docs/issues?utf8=✓&q={issue}",
 			"https://example.org/{tms}",
